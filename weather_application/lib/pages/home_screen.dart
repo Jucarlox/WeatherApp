@@ -57,17 +57,32 @@ class _MyHomePageState2 extends State<HomeScreen> {
     //citySelect = ModalRoute.of(context)!.settings.name as String;
 
     if (citySelect == "") {
-      return const MaterialApp(
+      return MaterialApp(
         home: Scaffold(
-          body: Center(
-            child: Text('No hay ciudad seleccionada'),
-          ),
+          body: Container(
+              child: const Center(
+                child: Text("Ninguna ciudad seleccionada"),
+              ),
+              decoration: const BoxDecoration(
+                  image: DecorationImage(
+                      image: AssetImage(
+                        "assets/tierra.jpg",
+                      ),
+                      fit: BoxFit.cover,
+                      opacity: 0.7))),
         ),
       );
     } else {
       return Scaffold(
-        body: Padding(
-          padding: const EdgeInsets.all(50.0),
+        body: Container(
+          width: MediaQuery.of(context).size.width,
+          decoration: const BoxDecoration(
+              image: DecorationImage(
+                  image: AssetImage(
+                    "assets/tierra.jpg",
+                  ),
+                  fit: BoxFit.cover,
+                  opacity: 0.7)),
           child: Column(
             children: [
               FutureBuilder<WeatherCityResponse>(
@@ -131,7 +146,13 @@ class _MyHomePageState2 extends State<HomeScreen> {
   Widget dates(WeatherCityResponse response) {
     return Column(
       children: [
-        Text(response.name),
+        Padding(
+          padding: const EdgeInsets.fromLTRB(0, 20, 0, 10),
+          child: Text(
+            response.name,
+            style: TextStyle(fontSize: 40),
+          ),
+        ),
         Text(response.coord.lat.toString()),
         Text(response.coord.lon.toString())
       ],
