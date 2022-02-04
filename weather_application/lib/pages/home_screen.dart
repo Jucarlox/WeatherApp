@@ -7,6 +7,10 @@ import 'package:weather_application/models/city.dart';
 import 'package:weather_application/models/weather_city.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
+import 'package:flutter_localizations/flutter_localizations.dart';
+
+import 'package:date_format/date_format.dart';
+
 late String citySelect = "";
 
 @override
@@ -117,40 +121,39 @@ class _MyHomePageState2 extends State<HomeScreen> {
     }
   }
 
-  /* Widget _planetItem(Current planet) {
-    return Container(
-        margin: const EdgeInsets.symmetric(vertical: 20.0),
-        width: 150,
-        child: Card(
-          child: InkWell(
-            splashColor: Colors.red.withAlpha(30),
-            onTap: () {
-              debugPrint('Card tapped.');
-            },
-            child: SizedBox(
-              width: 30,
-              height: 400,
-              child: Column(
-                children: [
-                  Text(planet.visibility.toString()),
-                ],
-              ),
-            ),
-          ),
-        ));
-  }*/
   Widget name(WeatherCityResponse response) {
     return Text(response.name);
   }
 
   Widget dates(WeatherCityResponse response) {
+    String _selectedDateTime =
+        formatDate(DateTime.now(), [DD, ", ", dd, " ", MM, " ", yyyy]);
     return Column(
       children: [
         Padding(
-          padding: const EdgeInsets.fromLTRB(0, 20, 0, 10),
+          padding: const EdgeInsets.fromLTRB(0, 40, 0, 50),
           child: Text(
             response.name,
-            style: TextStyle(fontSize: 40),
+            style: TextStyle(fontSize: 40, color: Colors.white),
+          ),
+        ),
+        Card(
+          color: Colors.blue.shade100,
+          child: InkWell(
+            splashColor: Colors.blue,
+            onTap: () {},
+            child: SizedBox(
+              width: 300,
+              height: 150,
+              child: Column(
+                children: [
+                  Padding(
+                    padding: const EdgeInsets.fromLTRB(0, 20, 0, 20),
+                    child: Text(_selectedDateTime),
+                  ),
+                ],
+              ),
+            ),
           ),
         ),
         Text(response.coord.lat.toString()),
