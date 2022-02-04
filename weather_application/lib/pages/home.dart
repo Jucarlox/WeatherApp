@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:weather_application/pages/home_screen.dart';
+import 'package:weather_application/pages/select_city.dart';
 
 void main() => runApp(const Home());
 
@@ -30,7 +31,7 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
       TextStyle(fontSize: 30, fontWeight: FontWeight.bold);
   static const List<Widget> _widgetOptions = <Widget>[
     HomeScreen(),
-    Text("data2"),
+    SelectCity(),
     Text("data3"),
   ];
 
@@ -38,12 +39,6 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
     setState(() {
       _selectedIndex = index;
     });
-  }
-
-  @override
-  void initState() {
-    weather = fetchWeather();
-    super.initState();
   }
 
   @override
@@ -56,16 +51,16 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
         items: const <BottomNavigationBarItem>[
           BottomNavigationBarItem(
             icon: Icon(
-              Icons.tv,
+              Icons.location_city,
             ),
             label: '',
           ),
           BottomNavigationBarItem(
-            icon: Icon(Icons.book),
+            icon: Icon(Icons.list),
             label: '',
           ),
           BottomNavigationBarItem(
-            icon: Icon(Icons.emoji_people_outlined),
+            icon: Icon(Icons.fiber_manual_record_sharp),
             label: '',
           ),
         ],

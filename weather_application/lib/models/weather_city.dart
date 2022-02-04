@@ -18,15 +18,15 @@ class WeatherCityResponse {
   late final List<Weather> weather;
   late final String base;
   late final Main main;
-  late final int visibility;
+  late final dynamic visibility;
   late final Wind wind;
   late final Clouds clouds;
-  late final int dt;
+  late final dynamic dt;
   late final Sys sys;
-  late final int timezone;
-  late final int id;
+  late final dynamic timezone;
+  late final dynamic id;
   late final String name;
-  late final int cod;
+  late final dynamic cod;
 
   WeatherCityResponse.fromJson(Map<String, dynamic> json) {
     coord = Coord.fromJson(json['coord']);
@@ -92,7 +92,7 @@ class Weather {
     required this.description,
     required this.icon,
   });
-  late final int id;
+  late final dynamic id;
   late final String main;
   late final String description;
   late final String icon;
@@ -123,12 +123,12 @@ class Main {
     required this.pressure,
     required this.humidity,
   });
-  late final double temp;
-  late final double feelsLike;
-  late final double tempMin;
-  late final double tempMax;
-  late final int pressure;
-  late final int humidity;
+  late final dynamic temp;
+  late final dynamic feelsLike;
+  late final dynamic tempMin;
+  late final dynamic tempMax;
+  late final dynamic pressure;
+  late final dynamic humidity;
 
   Main.fromJson(Map<String, dynamic> json) {
     temp = json['temp'];
@@ -157,9 +157,9 @@ class Wind {
     required this.deg,
     required this.gust,
   });
-  late final double speed;
-  late final int deg;
-  late final double gust;
+  late final dynamic speed;
+  late final dynamic deg;
+  late final dynamic gust;
 
   Wind.fromJson(Map<String, dynamic> json) {
     speed = json['speed'];
@@ -201,11 +201,11 @@ class Sys {
     required this.sunrise,
     required this.sunset,
   });
-  late final int type;
-  late final int id;
+  late final dynamic type;
+  late final dynamic id;
   late final String country;
-  late final int sunrise;
-  late final int sunset;
+  late final dynamic sunrise;
+  late final dynamic sunset;
 
   Sys.fromJson(Map<String, dynamic> json) {
     type = json['type'];
