@@ -26,12 +26,12 @@ class MyStatefulWidget extends StatefulWidget {
 }
 
 class _MyStatefulWidgetState extends State<MyStatefulWidget> {
-  int _selectedIndex = 0;
+  int _selectedIndex = 1;
   static const TextStyle optionStyle =
       TextStyle(fontSize: 30, fontWeight: FontWeight.bold);
   static const List<Widget> _widgetOptions = <Widget>[
-    HomeScreen(),
     SelectCity(),
+    HomeScreen(),
     Text("data3"),
   ];
 
@@ -51,22 +51,30 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
         items: const <BottomNavigationBarItem>[
           BottomNavigationBarItem(
             icon: Icon(
-              Icons.location_city,
+              Icons.list,
+              color: Colors.white,
             ),
             label: '',
           ),
           BottomNavigationBarItem(
-            icon: Icon(Icons.list),
+            icon: Icon(
+              Icons.location_city,
+              color: Colors.white,
+            ),
             label: '',
           ),
           BottomNavigationBarItem(
-            icon: Icon(Icons.fiber_manual_record_sharp),
+            icon: Icon(
+              Icons.fiber_manual_record_sharp,
+              color: Colors.white,
+            ),
             label: '',
           ),
         ],
         currentIndex: _selectedIndex,
         selectedItemColor: Colors.amber[800],
         onTap: _onItemTapped,
+        backgroundColor: Colors.black,
       ),
     );
   }

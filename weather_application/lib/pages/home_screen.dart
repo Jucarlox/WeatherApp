@@ -10,6 +10,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 
 import 'package:date_format/date_format.dart';
+import 'package:weather_application/pages/details_weather.dart';
 
 late String citySelect = "";
 
@@ -61,20 +62,20 @@ class _MyHomePageState2 extends State<HomeScreen> {
     //citySelect = ModalRoute.of(context)!.settings.name as String;
 
     if (citySelect == "") {
-      return MaterialApp(
-        home: Scaffold(
-          body: Container(
-              child: const Center(
-                child: Text("Ninguna ciudad seleccionada"),
+      return Scaffold(
+        body: Container(
+            child: const Center(
+              child: Text(
+                "Ninguna ciudad seleccionada",
+                style: TextStyle(color: Colors.white, fontSize: 25),
               ),
-              decoration: const BoxDecoration(
-                  image: DecorationImage(
-                      image: AssetImage(
-                        "assets/tierra.jpg",
-                      ),
-                      fit: BoxFit.cover,
-                      opacity: 0.7))),
-        ),
+            ),
+            decoration: const BoxDecoration(
+                image: DecorationImage(
+                    image: AssetImage(
+                      "assets/tierra.jpg",
+                    ),
+                    fit: BoxFit.cover))),
       );
     } else {
       return Scaffold(
@@ -85,8 +86,7 @@ class _MyHomePageState2 extends State<HomeScreen> {
                   image: AssetImage(
                     "assets/tierra.jpg",
                   ),
-                  fit: BoxFit.cover,
-                  opacity: 0.7)),
+                  fit: BoxFit.cover)),
           child: Column(
             children: [
               FutureBuilder<WeatherCityResponse>(
@@ -121,47 +121,137 @@ class _MyHomePageState2 extends State<HomeScreen> {
     }
   }
 
-  Widget name(WeatherCityResponse response) {
-    return Text(response.name);
-  }
-
   Widget dates(WeatherCityResponse response) {
     String _selectedDateTime =
         formatDate(DateTime.now(), [DD, ", ", dd, " ", MM, " ", yyyy]);
     return Column(
       children: [
         Padding(
-          padding: const EdgeInsets.fromLTRB(0, 40, 0, 50),
+          padding: const EdgeInsets.fromLTRB(0, 80, 0, 50),
           child: Text(
             response.name,
             style: TextStyle(fontSize: 40, color: Colors.white),
           ),
         ),
         Card(
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(15.0),
+          ),
           color: Colors.blue.shade100,
           child: InkWell(
             splashColor: Colors.blue,
             onTap: () {},
             child: SizedBox(
               width: 300,
-              height: 150,
+              height: 300,
               child: Column(
                 children: [
                   Padding(
-                    padding: const EdgeInsets.fromLTRB(0, 20, 0, 20),
+                    padding: const EdgeInsets.fromLTRB(0, 40, 0, 0),
                     child: Text(_selectedDateTime),
                   ),
+                  Padding(
+                    padding: const EdgeInsets.fromLTRB(0, 70, 0, 0),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Text(
+                          (response.main.temp - 273).toStringAsFixed(
+                            1,
+                          ),
+                          style: TextStyle(fontSize: 70, color: Colors.black),
+                        ),
+                        const Padding(
+                          padding: EdgeInsets.fromLTRB(0, 20, 0, 0),
+                          child: Text(
+                            "°C",
+                            style: TextStyle(fontSize: 40, color: Colors.black),
+                          ),
+                        )
+                      ],
+                    ),
+                  )
                 ],
               ),
             ),
           ),
         ),
-        Text(response.coord.lat.toString()),
-        Text(response.coord.lon.toString())
+        Padding(
+          padding: const EdgeInsets.fromLTRB(0, 20, 0, 0),
+          child: Card(
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(15.0),
+            ),
+            color: Colors.blue.shade100,
+            child: InkWell(
+              splashColor: Colors.blue,
+              onTap: () {
+                Navigator.of(context).pushNamed('/details_weather',
+                    arguments: response.weather[0]);
+              },
+              child: SizedBox(
+                width: 230,
+                height: 230,
+                child: Column(
+                  children: [
+                    Padding(
+                      padding: const EdgeInsets.fromLTRB(0, 45, 0, 0),
+                      child: SizedBox(
+                        height: 100,
+                        width: 200,
+                        child: Image.network(
+                          'http://openweathermap.org/img/wn/' +
+                              response.weather[0].icon +
+                              '@2x.png',
+                          width: 100,
+                        ),
+                      ),
+                    ),
+                    Text(response.weather[0].main)
+                  ],
+                ),
+              ),
+            ),
+          ),
+        ),
+        Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Padding(
+              padding: const EdgeInsets.fromLTRB(100, 5, 50, 0),
+              child: Row(
+                children: [
+                  Text(
+                      (response.main.tempMax - 273).toStringAsFixed(
+                        1,
+                      ),
+                      style: TextStyle(color: Colors.white)),
+                  const Icon(
+                    Icons.arrow_upward_rounded,
+                    color: Colors.white,
+                  )
+                ],
+              ),
+            ),
+            Padding(
+              padding: const EdgeInsets.fromLTRB(0, 5, 100, 0),
+              child: Row(
+                children: [
+                  Text(
+                      (response.main.tempMin - 273).toStringAsFixed(
+                        1,
+                      ),
+                      style: TextStyle(color: Colors.white)),
+                  const Icon(
+                    Icons.arrow_downward_rounded,
+                    color: Colors.white,
+                  )
+                ],
+              ),
+            ),
+          ],
+        )
       ],
     );
   }
-
-  @override
-  noSuchMethod(Invocation invocation) => super.noSuchMethod(invocation);
 }

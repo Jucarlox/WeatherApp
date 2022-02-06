@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:weather_application/pages/home.dart';
-import 'package:weather_application/pages/home_screen.dart';
+import 'package:weather_application/models/weather_city.dart';
+
+import 'pages/details_weather.dart';
+import 'pages/home.dart';
 
 void main() {
   runApp(const MyApp());
@@ -13,14 +15,11 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Flutter Demo',
-      theme: ThemeData(
-        primarySwatch: Colors.blue,
-      ),
       initialRoute: '/',
       routes: {
         '/': (context) => const Home(),
         '/home': (context) => const Home(),
+        '/details_weather': (context) => const DetailsWeather(),
       },
     );
   }

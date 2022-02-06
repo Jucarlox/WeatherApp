@@ -68,7 +68,14 @@ class _MyHomePageState extends State<SelectCity> {
       home: DefaultTabController(
         length: 1,
         child: Scaffold(
-          body: TabBarView(
+            body: Container(
+          decoration: const BoxDecoration(
+              image: DecorationImage(
+                  image: AssetImage(
+                    "assets/tierra.jpg",
+                  ),
+                  fit: BoxFit.cover)),
+          child: TabBarView(
             children: [
               Center(
                 child: FutureBuilder<List<LocationModel>>(
@@ -86,7 +93,7 @@ class _MyHomePageState extends State<SelectCity> {
               ),
             ],
           ),
-        ),
+        )),
       ),
     );
   }
@@ -125,7 +132,13 @@ class _MyHomePageState extends State<SelectCity> {
               height: 150,
               child: Column(
                 children: [
-                  Text(location.city),
+                  Padding(
+                    padding: const EdgeInsets.fromLTRB(0, 60, 0, 0),
+                    child: Text(
+                      location.city,
+                      style: TextStyle(fontSize: 25),
+                    ),
+                  ),
                 ],
               ),
             ),
