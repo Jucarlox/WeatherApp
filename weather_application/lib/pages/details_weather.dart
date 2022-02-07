@@ -5,7 +5,6 @@ import 'package:flutter/material.dart';
 
 import 'package:http/http.dart' as http;
 import 'package:shared_preferences/shared_preferences.dart';
-import 'package:weather_application/models/city.dart';
 import 'package:weather_application/models/days.dart';
 import 'package:weather_application/models/one_call.dart';
 import 'package:weather_application/models/weather_city.dart';
@@ -157,17 +156,21 @@ class _DetailsWeatherPageState extends State<DetailsWeather> {
   }
 
   Widget _hourlyItem(Hourly hour, int index) {
-    return Container(
-      width: 100,
-      decoration: BoxDecoration(
-        color: Colors.blue[800]?.withOpacity(0.8),
-      ),
-      child: Column(
-        children: [
-          Text(
-            hour.pressure.toString(),
-          )
-        ],
+    return Padding(
+      padding: const EdgeInsets.all(8.0),
+      child: Container(
+        width: 100,
+        decoration: BoxDecoration(
+          color: Colors.blue.shade100.withOpacity(0.8),
+        ),
+        child: Column(
+          children: [
+            Text(formatDate(listaHoras[index].hora, [HH, ":00 h"])),
+            Text(
+              hour.pressure.toString(),
+            )
+          ],
+        ),
       ),
     );
   }
@@ -186,19 +189,22 @@ class _DetailsWeatherPageState extends State<DetailsWeather> {
   }
 
   Widget _dailyItem(Daily daily, int index) {
-    return Container(
-      width: 100,
-      decoration: BoxDecoration(
-        color: Colors.blue[800]?.withOpacity(0.8),
-      ),
-      child: Column(
-        children: [
-          Text(formatDate(listaDias[index].day, [DD])),
-          Image.network('http://openweathermap.org/img/wn/' +
-              daily.weather[0].icon +
-              '.png'),
-          Text(daily.temp.day.toString()),
-        ],
+    return Padding(
+      padding: const EdgeInsets.all(8.0),
+      child: Container(
+        width: 100,
+        decoration: BoxDecoration(
+          color: Colors.blue.shade100.withOpacity(0.8),
+        ),
+        child: Column(
+          children: [
+            Text(formatDate(listaDias[index].day, [DD])),
+            Image.network('http://openweathermap.org/img/wn/' +
+                daily.weather[0].icon +
+                '.png'),
+            Text(daily.temp.day.toString()),
+          ],
+        ),
       ),
     );
   }

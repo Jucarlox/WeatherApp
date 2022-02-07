@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:weather_application/pages/home_screen.dart';
 import 'package:weather_application/pages/mapa.dart';
-import 'package:weather_application/pages/select_city.dart';
 
 void main() => runApp(const Home());
 
