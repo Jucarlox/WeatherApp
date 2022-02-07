@@ -13,6 +13,8 @@ import 'package:date_format/date_format.dart';
 import 'package:weather_application/pages/details_weather.dart';
 
 late String citySelect = "";
+late double latSelected = 0;
+late double lngSelected = 0;
 
 @override
 Widget build(BuildContext context) {
@@ -50,6 +52,7 @@ class HomeScreen extends StatefulWidget {
 
 class _MyHomePageState2 extends State<HomeScreen> {
   late Future<WeatherCityResponse> items;
+  late BuildContext _context;
 
   @override
   void initState() {
@@ -59,9 +62,10 @@ class _MyHomePageState2 extends State<HomeScreen> {
 
   @override
   Widget build(BuildContext context) {
+    _context = context;
     //citySelect = ModalRoute.of(context)!.settings.name as String;
 
-    if (citySelect == "") {
+    if (latSelected == 0) {
       return Scaffold(
         body: Container(
             child: const Center(
@@ -110,10 +114,13 @@ class _MyHomePageState2 extends State<HomeScreen> {
   Future<WeatherCityResponse> fetchWeather() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     var index = prefs.getInt('indexCity');
-    citySelect = ListaCiudades[index!].city;
+    citiSelect = coord[index!].city;
+
+    latSelected = prefs.getDouble('lat')!;
+    lngSelected = prefs.getDouble('lng')!;
 
     final response = await http.get(Uri.parse(
-        'https://api.openweathermap.org/data/2.5/weather?q=${citySelect}&lang=es&appid=b67e3a6f41956f3d2f21725d8148ee93'));
+        'https://api.openweathermap.org/data/2.5/weather?lat=${latSelected}&lon=${lngSelected}&appid=b67e3a6f41956f3d2f21725d8148ee93'));
     if (response.statusCode == 200) {
       return WeatherCityResponse.fromJson(jsonDecode(response.body));
     } else {
@@ -127,7 +134,7 @@ class _MyHomePageState2 extends State<HomeScreen> {
     return Column(
       children: [
         Padding(
-          padding: const EdgeInsets.fromLTRB(0, 80, 0, 50),
+          padding: const EdgeInsets.fromLTRB(0, 45, 0, 30),
           child: Text(
             response.name,
             style: TextStyle(fontSize: 40, color: Colors.white),
@@ -137,7 +144,7 @@ class _MyHomePageState2 extends State<HomeScreen> {
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(15.0),
           ),
-          color: Colors.blue.shade100,
+          color: Colors.blue.shade100.withOpacity(0.8),
           child: InkWell(
             splashColor: Colors.blue,
             onTap: () {},
@@ -182,12 +189,15 @@ class _MyHomePageState2 extends State<HomeScreen> {
             shape: RoundedRectangleBorder(
               borderRadius: BorderRadius.circular(15.0),
             ),
-            color: Colors.blue.shade100,
+            color: Colors.blue.shade100.withOpacity(0.8),
             child: InkWell(
               splashColor: Colors.blue,
               onTap: () {
-                Navigator.of(context).pushNamed('/details_weather',
-                    arguments: response.weather[0]);
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                      builder: (context) => const DetailsWeather()),
+                );
               },
               child: SizedBox(
                 width: 230,

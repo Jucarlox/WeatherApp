@@ -99,7 +99,7 @@ class _MyHomePageState extends State<SelectCity> {
   }
 
   Future<List<LocationModel>> fetchPeople() async {
-    return ListaCiudades;
+    return coord;
   }
 
   Widget _cityList(List<LocationModel> peopleList) {

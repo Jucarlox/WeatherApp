@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:weather_application/pages/home_screen.dart';
+import 'package:weather_application/pages/mapa.dart';
 import 'package:weather_application/pages/select_city.dart';
 
 void main() => runApp(const Home());
@@ -32,7 +33,7 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
   static const List<Widget> _widgetOptions = <Widget>[
     SelectCity(),
     HomeScreen(),
-    Text("data3"),
+    MapClickPage(),
   ];
 
   void _onItemTapped(int index) {
