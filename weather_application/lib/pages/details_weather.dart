@@ -1,10 +1,12 @@
 import 'dart:convert';
 
+import 'package:date_format/date_format.dart';
 import 'package:flutter/material.dart';
 
 import 'package:http/http.dart' as http;
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:weather_application/models/city.dart';
+import 'package:weather_application/models/days.dart';
 import 'package:weather_application/models/one_call.dart';
 import 'package:weather_application/models/weather_city.dart';
 
@@ -113,10 +115,9 @@ class _DetailsWeatherPageState extends State<DetailsWeather> {
 
   Future<List<Daily>> fetchDaily() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
-    var index = prefs.getInt('indexCity');
-    citiSelect = coord[index!].city;
-    latSelected = coord[index].lat;
-    lngSelected = coord[index].lng;
+
+    latSelected = prefs.getDouble('lat')!;
+    lngSelected = prefs.getDouble('lng')!;
 
     final response = await http.get(Uri.parse(
         'https://api.openweathermap.org/data/2.5/onecall?lat=${latSelected}&lon=${lngSelected}&exclude=minutely&appid=b67e3a6f41956f3d2f21725d8148ee93&units=metric'));
@@ -129,11 +130,9 @@ class _DetailsWeatherPageState extends State<DetailsWeather> {
 
   Future<List<Hourly>> fetchHourly() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
-    var index = prefs.getInt('indexCity');
-    citiSelect = coord[index!].city;
 
-    var latSelected = prefs.getDouble('lat');
-    var lngSelected = prefs.getDouble('lng');
+    latSelected = prefs.getDouble('lat')!;
+    lngSelected = prefs.getDouble('lng')!;
 
     final response = await http.get(Uri.parse(
         'https://api.openweathermap.org/data/2.5/onecall?lat=${latSelected}&lon=${lngSelected}&exclude=minutely&appid=b67e3a6f41956f3d2f21725d8148ee93&units=metric'));
@@ -194,9 +193,7 @@ class _DetailsWeatherPageState extends State<DetailsWeather> {
       ),
       child: Column(
         children: [
-          Text(
-            daily.pressure.toString(),
-          ),
+          Text(formatDate(listaDias[index].day, [DD])),
           Image.network('http://openweathermap.org/img/wn/' +
               daily.weather[0].icon +
               '.png'),

@@ -113,14 +113,12 @@ class _MyHomePageState2 extends State<HomeScreen> {
 
   Future<WeatherCityResponse> fetchWeather() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
-    var index = prefs.getInt('indexCity');
-    citiSelect = coord[index!].city;
 
     latSelected = prefs.getDouble('lat')!;
     lngSelected = prefs.getDouble('lng')!;
 
     final response = await http.get(Uri.parse(
-        'https://api.openweathermap.org/data/2.5/weather?lat=${latSelected}&lon=${lngSelected}&appid=b67e3a6f41956f3d2f21725d8148ee93'));
+        'https://api.openweathermap.org/data/2.5/weather?lat=$latSelected&lon=$lngSelected&appid=b67e3a6f41956f3d2f21725d8148ee93'));
     if (response.statusCode == 200) {
       return WeatherCityResponse.fromJson(jsonDecode(response.body));
     } else {

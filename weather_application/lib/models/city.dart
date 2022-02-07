@@ -1,3 +1,5 @@
+import 'package:date_format/date_format.dart';
+
 class LocationModel {
   LocationModel({required this.city, required this.lat, required this.lng});
   String city;
@@ -15,3 +17,13 @@ final coord = [
   LocationModel(city: 'Andorra', lat: 42.5424508, lng: 1.4576068),
   LocationModel(city: 'London', lat: 51.5287352, lng: -0.3817858),
 ];
+
+
+ //DateTime _selectedDateTime = DateTime.now();
+
+ //DateTime fiftyDaysFromNow = _selectedDateTime.add(const Duration(days: 1));
+
+ //String hola = formatDate(fiftyDaysFromNow, [DD, ", ", dd, " ", MM, " ", yyyy]);
+
+
+//String _selectedDateTime = formatDate(DateTime.now(), [DD, ", ", dd, " ", MM, " ", yyyy]);
