@@ -79,20 +79,3 @@ class _MapClickBodyState extends State<_MapClickBody> {
     });
   }
 }
-
-
-
-/**onTap: (LatLng pos) {
-        setState(() async {
-          _lastTap = pos;
-          SharedPreferences prefs = await SharedPreferences.getInstance();
-          prefs.setDouble('lat', pos.latitude);
-        });
-      },
-      onLongPress: (LatLng pos) {
-        setState(() async {
-          _lastLongPress = pos;
-          SharedPreferences prefs = await SharedPreferences.getInstance();
-          prefs.setDouble('lng', pos.longitude);
-        });
-      }, */
