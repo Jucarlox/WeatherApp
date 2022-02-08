@@ -142,13 +142,29 @@ class _DetailsWeatherPageState extends State<DetailsWeather> {
     }
   }
 
+  Future<WeatherCityResponse> fetchWeather() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    var lat = prefs.getDouble('lat');
+    var lng = prefs.getDouble('lng');
+
+    latSelected = lat!;
+    lngSelected = lng!;
+    final response = await http.get(Uri.parse(
+        'https://api.openweathermap.org/data/2.5/weather?lat=${latSelected}&lon=${lngSelected}&appid=b67e3a6f41956f3d2f21725d8148ee93'));
+    if (response.statusCode == 200) {
+      return WeatherCityResponse.fromJson(jsonDecode(response.body));
+    } else {
+      throw Exception('Failed to load planets');
+    }
+  }
+
   Widget _hourlyList(List<Hourly> hourlyResponse) {
     return SizedBox(
       height: 100,
       width: MediaQuery.of(context).size.width,
       child: ListView.builder(
           scrollDirection: Axis.horizontal,
-          itemCount: hourlyResponse.length,
+          itemCount: 24,
           itemBuilder: (context, index) {
             return _hourlyItem(hourlyResponse.elementAt(index), index);
           }),
@@ -166,9 +182,10 @@ class _DetailsWeatherPageState extends State<DetailsWeather> {
         child: Column(
           children: [
             Text(formatDate(listaHoras[index].hora, [HH, ":00 h"])),
-            Text(
-              hour.pressure.toString(),
-            )
+            Image.asset(
+              'assets/${hour.weather[0].icon}.png',
+              width: 100,
+            ),
           ],
         ),
       ),
@@ -177,7 +194,7 @@ class _DetailsWeatherPageState extends State<DetailsWeather> {
 
   Widget _dailyList(List<Daily> dailyResponse) {
     return SizedBox(
-      height: 100,
+      height: 150,
       width: MediaQuery.of(context).size.width,
       child: ListView.builder(
           scrollDirection: Axis.horizontal,
@@ -192,16 +209,20 @@ class _DetailsWeatherPageState extends State<DetailsWeather> {
     return Padding(
       padding: const EdgeInsets.all(8.0),
       child: Container(
-        width: 100,
+        width: 150,
         decoration: BoxDecoration(
           color: Colors.blue.shade100.withOpacity(0.8),
         ),
         child: Column(
           children: [
             Text(formatDate(listaDias[index].day, [DD])),
-            Image.network('http://openweathermap.org/img/wn/' +
+            /*Image.network('http://openweathermap.org/img/wn/' +
                 daily.weather[0].icon +
-                '.png'),
+                '.png'),*/
+            Image.asset(
+              'assets/${daily.weather[0].icon}.png',
+              width: 100,
+            ),
             Text(daily.temp.day.toString()),
           ],
         ),

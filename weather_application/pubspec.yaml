@@ -38,9 +38,12 @@ dependencies:
   shared_preferences: ^2.0.12
   flutter_localizations: 
     sdk: flutter
-    version: ^0.0.0
+  
   date_format: ^2.0.5
   google_maps_flutter: 2.1.1
+  flutter_google_places: ^0.3.0
+  
+  
 
 dev_dependencies:
   flutter_test:
@@ -68,6 +71,24 @@ flutter:
   assets:
     - assets/tierra.jpg
     - assets/tierra2.jpg
+    - assets/01d.png
+    - assets/01n.png
+    - assets/02d.png
+    - assets/02n.png
+    - assets/03d.png
+    - assets/03n.png
+    - assets/04d.png
+    - assets/04n.png
+    - assets/09d.png
+    - assets/09n.png
+    - assets/10d.png
+    - assets/10n.png
+    - assets/11d.png
+    - assets/11n.png
+    - assets/13d.png
+    - assets/13n.png
+    - assets/50d.png
+    - assets/50n.png
   #   - images/a_dot_ham.jpeg
 
   # An image asset can refer to one or more resolution-specific "variants", see

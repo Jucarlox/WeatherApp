@@ -204,15 +204,12 @@ class _MyHomePageState2 extends State<HomeScreen> {
                     Padding(
                       padding: const EdgeInsets.fromLTRB(0, 45, 0, 0),
                       child: SizedBox(
-                        height: 100,
-                        width: 200,
-                        child: Image.network(
-                          'http://openweathermap.org/img/wn/' +
-                              response.weather[0].icon +
-                              '@2x.png',
-                          width: 100,
-                        ),
-                      ),
+                          height: 100,
+                          width: 200,
+                          child: Image.asset(
+                            'assets/${response.weather[0].icon}.png',
+                            width: 100,
+                          )),
                     ),
                     Text(response.weather[0].main)
                   ],
