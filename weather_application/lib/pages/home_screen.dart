@@ -106,7 +106,119 @@ class _MyHomePageState2 extends State<HomeScreen> {
                             },
                           ),
                           Padding(
-                            padding: const EdgeInsets.only(top: 50, bottom: 50),
+                            padding: EdgeInsets.symmetric(
+                              horizontal:
+                                  MediaQuery.of(context).size.width * 0.05,
+                              vertical:
+                                  MediaQuery.of(context).size.height * 0.02,
+                            ),
+                            child: Container(
+                              decoration: BoxDecoration(
+                                borderRadius: const BorderRadius.all(
+                                  Radius.circular(10),
+                                ),
+                                color: Colors.white.withOpacity(0.05),
+                              ),
+                              child: Column(
+                                children: [
+                                  Align(
+                                    alignment: Alignment.centerLeft,
+                                    child: Padding(
+                                      padding: EdgeInsets.only(
+                                        top:
+                                            MediaQuery.of(context).size.height *
+                                                0.02,
+                                        left:
+                                            MediaQuery.of(context).size.width *
+                                                0.03,
+                                      ),
+                                      child: Text(
+                                        'Pronóstico 24 horas',
+                                        style: TextStyle(
+                                          color: Colors.white,
+                                          fontSize: MediaQuery.of(context)
+                                                  .size
+                                                  .height *
+                                              0.025,
+                                          fontWeight: FontWeight.bold,
+                                        ),
+                                      ),
+                                    ),
+                                  ),
+                                  Divider(
+                                    color: Colors.white,
+                                  ),
+                                ],
+                              ),
+                            ),
+                          ),
+                          Padding(
+                            padding: const EdgeInsets.only(bottom: 50),
+                            child: FutureBuilder<List<Hourly>>(
+                                future: hourlyWeather,
+                                builder: (context, snapshot) {
+                                  if (snapshot.hasData) {
+                                    return _hourlyList(snapshot.data!);
+                                  } else if (snapshot.hasError) {
+                                    return Text(
+                                      '${snapshot.error}',
+                                      style: TextStyle(color: Colors.white),
+                                    );
+                                  }
+
+                                  return const Center(
+                                      child: CircularProgressIndicator());
+                                }),
+                          ),
+                          Padding(
+                            padding: EdgeInsets.symmetric(
+                              horizontal:
+                                  MediaQuery.of(context).size.width * 0.05,
+                              vertical:
+                                  MediaQuery.of(context).size.height * 0.02,
+                            ),
+                            child: Container(
+                              decoration: BoxDecoration(
+                                borderRadius: const BorderRadius.all(
+                                  Radius.circular(10),
+                                ),
+                                color: Colors.white.withOpacity(0.05),
+                              ),
+                              child: Column(
+                                children: [
+                                  Align(
+                                    alignment: Alignment.centerLeft,
+                                    child: Padding(
+                                      padding: EdgeInsets.only(
+                                        top:
+                                            MediaQuery.of(context).size.height *
+                                                0.02,
+                                        left:
+                                            MediaQuery.of(context).size.width *
+                                                0.03,
+                                      ),
+                                      child: Text(
+                                        'Pronóstico 7 dias',
+                                        style: TextStyle(
+                                          color: Colors.white,
+                                          fontSize: MediaQuery.of(context)
+                                                  .size
+                                                  .height *
+                                              0.025,
+                                          fontWeight: FontWeight.bold,
+                                        ),
+                                      ),
+                                    ),
+                                  ),
+                                  Divider(
+                                    color: Colors.white,
+                                  ),
+                                ],
+                              ),
+                            ),
+                          ),
+                          Padding(
+                            padding: const EdgeInsets.only(bottom: 50),
                             child: FutureBuilder<List<Daily>>(
                                 future: dailyWeather,
                                 builder: (context, snapshot) {
@@ -177,7 +289,7 @@ class _MyHomePageState2 extends State<HomeScreen> {
 
   Widget _hourlyList(List<Hourly> hourlyResponse) {
     return SizedBox(
-      height: 100,
+      height: 150,
       width: MediaQuery.of(context).size.width,
       child: ListView.builder(
           scrollDirection: Axis.horizontal,
@@ -192,67 +304,41 @@ class _MyHomePageState2 extends State<HomeScreen> {
     return Padding(
       padding: const EdgeInsets.all(8.0),
       child: Container(
-        width: 100,
-        decoration: BoxDecoration(
-          color: Colors.black12.withOpacity(0.8),
-        ),
-        child: Column(
-          children: [
-            Text(formatDate(listaHoras[index].hora, [HH, ":00 h"])),
-            Image.asset(
-              'assets/${hour.weather[0].icon}.png',
-              width: 100,
-            ),
-          ],
-        ),
-      ),
-    );
-  }
-
-  Widget _dailyList(List<Daily> dailyResponse) {
-    return SizedBox(
-      height: 150,
-      width: MediaQuery.of(context).size.width,
-      child: ListView.builder(
-          scrollDirection: Axis.horizontal,
-          itemCount: dailyResponse.length,
-          itemBuilder: (context, index) {
-            return _dailyItem(dailyResponse.elementAt(index), index);
-          }),
-    );
-  }
-
-  Widget _dailyItem(Daily daily, int index) {
-    return Padding(
-      padding: const EdgeInsets.all(8.0),
-      child: Container(
         width: 150,
         decoration: BoxDecoration(
-          color: Colors.grey.withOpacity(0.2),
+          color: Colors.grey.withOpacity(0.4),
         ),
         child: Column(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
-            Text(
-              formatDate(listaDias[index].day, [DD]),
-              style: GoogleFonts.questrial(
-                color: Colors.white,
-                fontSize: MediaQuery.of(context).size.height * 0.02,
-                fontWeight: FontWeight.bold,
+            Padding(
+              padding: EdgeInsets.only(
+                top: MediaQuery.of(context).size.height * 0.007,
+              ),
+              child: Text(
+                formatDate(listaHoras[index].hora, [HH, ":00 h"]),
+                style: GoogleFonts.questrial(
+                  color: Colors.white,
+                  fontSize: MediaQuery.of(context).size.height * 0.02,
+                  fontWeight: FontWeight.bold,
+                ),
               ),
             ),
-            /*Image.network('http://openweathermap.org/img/wn/' +
-                daily.weather[0].icon +
-                '.png'),*/
             Image.asset(
-              'assets/${daily.weather[0].icon}.png',
+              'assets/${hour.weather[0].icon}.png',
               width: 90,
             ),
-            Text(
-              daily.temp.day.toString(),
-              style: GoogleFonts.questrial(
-                color: Colors.white,
-                fontSize: MediaQuery.of(context).size.height * 0.02,
-                fontWeight: FontWeight.bold,
+            Padding(
+              padding: EdgeInsets.only(
+                bottom: MediaQuery.of(context).size.height * 0.0023,
+              ),
+              child: Text(
+                hour.temp.toString(),
+                style: GoogleFonts.questrial(
+                  color: Colors.white,
+                  fontSize: MediaQuery.of(context).size.height * 0.02,
+                  fontWeight: FontWeight.bold,
+                ),
               ),
             )
           ],
@@ -261,9 +347,98 @@ class _MyHomePageState2 extends State<HomeScreen> {
     );
   }
 
+  Widget _dailyList(List<Daily> dailyResponse) {
+    return SizedBox(
+      height: 330,
+      width: MediaQuery.of(context).size.width,
+      child: ListView.builder(
+          scrollDirection: Axis.vertical,
+          itemCount: 7,
+          itemBuilder: (context, index) {
+            return _dailyItem(dailyResponse.elementAt(index), index);
+          }),
+    );
+  }
+
+  Widget _dailyItem(Daily daily, int index) {
+    Size size = MediaQuery.of(context).size;
+    double min = (daily.temp.min);
+    double max = (daily.temp.max);
+    return Padding(
+      padding: EdgeInsets.all(
+        size.height * 0.005,
+      ),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Stack(
+            children: [
+              Padding(
+                padding: EdgeInsets.symmetric(
+                  horizontal: size.width * 0.02,
+                ),
+                child: Text(
+                  formatDate(listaDias[index].day, [DD],
+                      locale: const SpanishDateLocale()),
+                  style: TextStyle(
+                    color: Colors.white,
+                    fontSize: size.height * 0.025,
+                  ),
+                ),
+              ),
+              Padding(
+                padding: EdgeInsets.symmetric(
+                  horizontal: size.width * 0.25,
+                ),
+                child: Image.asset(
+                  'assets/${daily.weather[0].icon}.png',
+                  height: size.height * 0.06,
+                  color: Colors.white,
+                ),
+              ),
+              Align(
+                child: Padding(
+                  padding: EdgeInsets.only(
+                    left: size.width * 0.15,
+                  ),
+                  child: Text(
+                    min.toStringAsFixed(1) + '˚C',
+                    style: TextStyle(
+                      color: Colors.white38,
+                      fontSize: size.height * 0.025,
+                    ),
+                  ),
+                ),
+              ),
+              Align(
+                alignment: Alignment.centerRight,
+                child: Padding(
+                  padding: EdgeInsets.symmetric(
+                    horizontal: size.width * 0.05,
+                  ),
+                  child: Text(
+                    max.toStringAsFixed(1) + '˚C',
+                    style: TextStyle(
+                      color: Colors.white,
+                      fontSize: size.height * 0.025,
+                    ),
+                  ),
+                ),
+              ),
+            ],
+          ),
+          Divider(
+            color: Colors.white,
+          ),
+        ],
+      ),
+    );
+  }
+
   Widget dates(WeatherCityResponse response) {
-    String _selectedDateTime =
-        formatDate(DateTime.now(), [DD, ", ", dd, " ", MM, " ", yyyy]);
+    String _selectedDateTime = formatDate(
+        DateTime.now(), [DD, ", ", dd, " ", MM, " ", yyyy],
+        locale: const SpanishDateLocale());
     return Column(
       children: [
         Padding(
@@ -285,21 +460,21 @@ class _MyHomePageState2 extends State<HomeScreen> {
           children: [
             Padding(
               padding: EdgeInsets.only(
-                top: MediaQuery.of(context).size.height * 0.005,
+                top: MediaQuery.of(context).size.height * 0.020,
               ),
               child: Align(
                 child: Text(
                   _selectedDateTime, //day
                   style: GoogleFonts.questrial(
-                    color: Colors.white54,
-                    fontSize: MediaQuery.of(context).size.height * 0.035,
+                    color: Colors.white70,
+                    fontSize: MediaQuery.of(context).size.height * 0.030,
                   ),
                 ),
               ),
             ),
             Padding(
               padding: EdgeInsets.only(
-                top: MediaQuery.of(context).size.height * 0.005,
+                top: MediaQuery.of(context).size.height * 0.020,
               ),
               child: Image.asset(
                 'assets/${response.weather[0].icon}.png',
@@ -361,7 +536,7 @@ class _MyHomePageState2 extends State<HomeScreen> {
                 child: Text(
                   response.weather[0].main, // weather
                   style: GoogleFonts.questrial(
-                    color: Colors.white54,
+                    color: Colors.white70,
                     fontSize: MediaQuery.of(context).size.height * 0.03,
                   ),
                 ),
