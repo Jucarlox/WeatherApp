@@ -450,7 +450,7 @@ class _MyHomePageState2 extends State<HomeScreen> {
               overflow: TextOverflow.ellipsis,
               style: GoogleFonts.questrial(
                 color: Colors.white,
-                fontSize: MediaQuery.of(context).size.height * 0.06,
+                fontSize: MediaQuery.of(context).size.height * 0.04,
                 fontWeight: FontWeight.bold,
               ),
             ),
@@ -600,84 +600,3 @@ class _MyHomePageState2 extends State<HomeScreen> {
     );
   }
 }
-
-
-
-
-
-
-/**Padding(
-          padding: const EdgeInsets.fromLTRB(0, 20, 0, 0),
-          child: Card(
-            shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular(15.0),
-            ),
-            color: Colors.blue.shade100.withOpacity(0.8),
-            child: InkWell(
-              splashColor: Colors.blue,
-              onTap: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                      builder: (context) => const DetailsWeather()),
-                );
-              },
-              child: SizedBox(
-                width: 230,
-                height: 230,
-                child: Column(
-                  children: [
-                    Padding(
-                      padding: const EdgeInsets.fromLTRB(0, 45, 0, 0),
-                      child: SizedBox(
-                          height: 100,
-                          width: 200,
-                          child: Image.asset(
-                            'assets/${response.weather[0].icon}.png',
-                            width: 100,
-                          )),
-                    ),
-                    Text(response.weather[0].main)
-                  ],
-                ),
-              ),
-            ),
-          ),
-        ),
-        Row(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            Padding(
-              padding: const EdgeInsets.fromLTRB(100, 5, 50, 0),
-              child: Row(
-                children: [
-                  Text(
-                      (response.main.tempMax - 273).toStringAsFixed(
-                        0,
-                      ),
-                      style: TextStyle(color: Colors.white)),
-                  const Icon(
-                    Icons.arrow_upward_rounded,
-                    color: Colors.white,
-                  )
-                ],
-              ),
-            ),
-            Padding(
-              padding: const EdgeInsets.fromLTRB(0, 5, 100, 0),
-              child: Row(
-                children: [
-                  Text(
-                      (response.main.tempMin - 273).toStringAsFixed(
-                        0,
-                      ),
-                      style: TextStyle(color: Colors.white)),
-                  const Icon(
-                    Icons.arrow_downward_rounded,
-                    color: Colors.white,
-                  )
-                ],
-              ),
-            ),
-          ],
-        ) */
