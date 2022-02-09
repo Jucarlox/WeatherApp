@@ -9,7 +9,7 @@ import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:weather_application/models/map.dart';
 
-const CameraPosition _kInitialPosition =
+CameraPosition _kInitialPosition =
     CameraPosition(target: LatLng(37.3754865, -6.0250989), zoom: 11.0);
 
 class MapClickPage extends GoogleMapExampleAppPage {
@@ -27,10 +27,29 @@ class _MapClickBody extends StatefulWidget {
 }
 
 class _MapClickBodyState extends State<_MapClickBody> {
-  _MapClickBodyState();
   GoogleMapController? mapController;
-  LatLng _lastTap = LatLng(37.3754865, -6.0250989);
+  LatLng _lastTap = LatLng(0, 0);
   LatLng? _lastLongPress;
+  @override
+  void initState() {
+    super.initState();
+    coordenadas();
+  }
+
+  coordenadas() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    if (prefs.getDouble('lat') != null) {
+      double? lat = prefs.getDouble('lat');
+      double? lng = prefs.getDouble('lng');
+      _lastTap = LatLng(lat!, lng!);
+      _kInitialPosition = CameraPosition(target: _lastTap, zoom: 11.0);
+    } else {
+      _kInitialPosition = const CameraPosition(
+          target: LatLng(37.3754865, -6.0250989), zoom: 11.0);
+      return _lastTap = const LatLng(37.3754865, -6.0250989);
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     final GoogleMap googleMap = GoogleMap(
@@ -39,6 +58,7 @@ class _MapClickBodyState extends State<_MapClickBody> {
       onTap: (LatLng pos) async {
         setState(() {
           _lastTap = pos;
+          coordenadas();
         });
         SharedPreferences prefs = await SharedPreferences.getInstance();
         prefs.setDouble('lat', pos.latitude);

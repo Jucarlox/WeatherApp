@@ -219,10 +219,7 @@ class _DetailsWeatherPageState extends State<DetailsWeather> {
             /*Image.network('http://openweathermap.org/img/wn/' +
                 daily.weather[0].icon +
                 '.png'),*/
-            Image.asset(
-              'assets/${daily.weather[0].icon}.png',
-              width: 100,
-            ),
+
             Text(daily.temp.day.toString()),
           ],
         ),

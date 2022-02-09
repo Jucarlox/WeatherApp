@@ -326,7 +326,7 @@ class _MyHomePageState2 extends State<HomeScreen> {
             ),
             Image.asset(
               'assets/${hour.weather[0].icon}.png',
-              width: 90,
+              width: 70,
             ),
             Padding(
               padding: EdgeInsets.only(
@@ -388,12 +388,11 @@ class _MyHomePageState2 extends State<HomeScreen> {
               ),
               Padding(
                 padding: EdgeInsets.symmetric(
-                  horizontal: size.width * 0.25,
+                  horizontal: size.width * 0.3,
                 ),
                 child: Image.asset(
                   'assets/${daily.weather[0].icon}.png',
                   height: size.height * 0.06,
-                  color: Colors.white,
                 ),
               ),
               Align(
@@ -448,6 +447,7 @@ class _MyHomePageState2 extends State<HomeScreen> {
           child: Align(
             child: Text(
               response.name,
+              overflow: TextOverflow.ellipsis,
               style: GoogleFonts.questrial(
                 color: Colors.white,
                 fontSize: MediaQuery.of(context).size.height * 0.06,
@@ -474,11 +474,11 @@ class _MyHomePageState2 extends State<HomeScreen> {
             ),
             Padding(
               padding: EdgeInsets.only(
-                top: MediaQuery.of(context).size.height * 0.020,
+                top: MediaQuery.of(context).size.height * 0.03,
               ),
               child: Image.asset(
                 'assets/${response.weather[0].icon}.png',
-                width: 100,
+                width: 150,
               ),
             ),
             Padding(
