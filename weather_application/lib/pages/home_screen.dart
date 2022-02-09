@@ -289,7 +289,7 @@ class _MyHomePageState2 extends State<HomeScreen> {
 
   Widget _hourlyList(List<Hourly> hourlyResponse) {
     return SizedBox(
-      height: 150,
+      height: 210,
       width: MediaQuery.of(context).size.width,
       child: ListView.builder(
           scrollDirection: Axis.horizontal,
@@ -301,6 +301,26 @@ class _MyHomePageState2 extends State<HomeScreen> {
   }
 
   Widget _hourlyItem(Hourly hour, int index) {
+    dynamic rain;
+    Image imagen;
+    if (hour.rain != null) {
+      rain = hour.rain
+          .toString()
+          .replaceAll("{1h:", "")
+          .replaceAll("}", "")
+          .replaceAll("0.", "");
+      imagen = Image.asset(
+        'assets/paraguasOn.png',
+        width: 50,
+      );
+    } else {
+      rain = 0;
+      imagen = Image.asset(
+        'assets/paraguasOff.png',
+        width: 50,
+      );
+    }
+
     return Padding(
       padding: const EdgeInsets.all(8.0),
       child: Container(
@@ -328,18 +348,28 @@ class _MyHomePageState2 extends State<HomeScreen> {
               'assets/${hour.weather[0].icon}.png',
               width: 70,
             ),
-            Padding(
-              padding: EdgeInsets.only(
-                bottom: MediaQuery.of(context).size.height * 0.0023,
-              ),
-              child: Text(
-                hour.temp.toString(),
-                style: GoogleFonts.questrial(
-                  color: Colors.white,
-                  fontSize: MediaQuery.of(context).size.height * 0.02,
-                  fontWeight: FontWeight.bold,
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Padding(
+                  padding: EdgeInsets.symmetric(
+                    vertical: MediaQuery.of(context).size.height * 0.01,
+                  ),
+                  child: imagen,
                 ),
-              ),
+                Padding(
+                  padding: EdgeInsets.only(
+                    left: MediaQuery.of(context).size.height * 0.01,
+                  ),
+                  child: Text(
+                    rain.toString() + '%',
+                    style: TextStyle(
+                      color: Colors.blue,
+                      fontSize: MediaQuery.of(context).size.height * 0.02,
+                    ),
+                  ),
+                ),
+              ],
             )
           ],
         ),
@@ -401,7 +431,7 @@ class _MyHomePageState2 extends State<HomeScreen> {
                     left: size.width * 0.15,
                   ),
                   child: Text(
-                    min.toStringAsFixed(1) + '˚C',
+                    min.toStringAsFixed(1) + '˚C ↓',
                     style: TextStyle(
                       color: Colors.white38,
                       fontSize: size.height * 0.025,
@@ -416,7 +446,7 @@ class _MyHomePageState2 extends State<HomeScreen> {
                     horizontal: size.width * 0.05,
                   ),
                   child: Text(
-                    max.toStringAsFixed(1) + '˚C',
+                    max.toStringAsFixed(1) + '˚C ↑',
                     style: TextStyle(
                       color: Colors.white,
                       fontSize: size.height * 0.025,
@@ -450,7 +480,7 @@ class _MyHomePageState2 extends State<HomeScreen> {
               overflow: TextOverflow.ellipsis,
               style: GoogleFonts.questrial(
                 color: Colors.white,
-                fontSize: MediaQuery.of(context).size.height * 0.04,
+                fontSize: MediaQuery.of(context).size.height * 0.05,
                 fontWeight: FontWeight.bold,
               ),
             ),
@@ -467,7 +497,7 @@ class _MyHomePageState2 extends State<HomeScreen> {
                   _selectedDateTime, //day
                   style: GoogleFonts.questrial(
                     color: Colors.white70,
-                    fontSize: MediaQuery.of(context).size.height * 0.030,
+                    fontSize: MediaQuery.of(context).size.height * 0.025,
                   ),
                 ),
               ),

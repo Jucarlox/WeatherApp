@@ -80,17 +80,19 @@ flutter:
     - assets/03d.png
     - assets/03n.png
     - assets/04d.png
-    #- assets/04n.png
+    - assets/04n.png
     - assets/09d.png
-    #- assets/09n.png
+    - assets/09n.png
     - assets/10d.png
     - assets/10n.png
-    #- assets/11d.png
+    - assets/11d.png
     - assets/11n.png
     - assets/13d.png
     - assets/13n.png
     - assets/50d.png
     - assets/50n.png
+    - assets/paraguasOff.png
+    - assets/paraguasOn.png
   #   - images/a_dot_ham.jpeg
 
   # An image asset can refer to one or more resolution-specific "variants", see

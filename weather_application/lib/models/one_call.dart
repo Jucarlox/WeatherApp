@@ -169,6 +169,7 @@ class Hourly {
   late final dynamic windGust;
   late final List<Weather> weather;
   late final dynamic pop;
+  late final dynamic rain;
 
   Hourly.fromJson(Map<String, dynamic> json) {
     dt = json['dt'];
@@ -186,6 +187,7 @@ class Hourly {
     weather =
         List.from(json['weather']).map((e) => Weather.fromJson(e)).toList();
     pop = json['pop'];
+    rain = json['rain'];
   }
 
   Map<String, dynamic> toJson() {
@@ -204,6 +206,7 @@ class Hourly {
     _data['wind_gust'] = windGust;
     _data['weather'] = weather.map((e) => e.toJson()).toList();
     _data['pop'] = pop;
+    _data['rain'] = rain;
     return _data;
   }
 }
