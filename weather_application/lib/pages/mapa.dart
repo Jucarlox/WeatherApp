@@ -77,7 +77,7 @@ class _MapClickBodyState extends State<_MapClickBody> {
         child: Center(
           child: SizedBox(
             width: MediaQuery.of(context).size.width,
-            height: MediaQuery.of(context).size.height - 155,
+            height: MediaQuery.of(context).size.height - 60,
             child: googleMap,
           ),
         ),
@@ -88,47 +88,10 @@ class _MapClickBodyState extends State<_MapClickBody> {
       crossAxisAlignment: CrossAxisAlignment.stretch,
       children: [
         Column(
-          children: buscador(),
-        ),
-        Column(
           children: columnChildren,
         ),
       ],
     );
-  }
-
-  List<Widget> buscador() {
-    return <Widget>[
-      // Replace this container with your Map widget
-      Container(
-        color: Colors.black,
-      ),
-      Positioned(
-        top: 10,
-        right: 15,
-        left: 15,
-        child: Container(
-          color: Colors.white,
-          child: Padding(
-            padding: const EdgeInsets.only(top: 50, bottom: 0),
-            child: Row(
-              children: const <Widget>[
-                Expanded(
-                  child: TextField(
-                    cursorColor: Colors.black,
-                    keyboardType: TextInputType.text,
-                    textInputAction: TextInputAction.go,
-                    decoration: InputDecoration(
-                        contentPadding: EdgeInsets.symmetric(horizontal: 15),
-                        hintText: "Search..."),
-                  ),
-                ),
-              ],
-            ),
-          ),
-        ),
-      ),
-    ];
   }
 
   void onMapCreated(GoogleMapController controller) async {

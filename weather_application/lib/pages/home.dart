@@ -1,6 +1,8 @@
+import 'package:curved_navigation_bar/curved_navigation_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:weather_application/pages/home_screen.dart';
 import 'package:weather_application/pages/mapa.dart';
+import 'package:weather_application/pages/moon.dart';
 
 void main() => runApp(const Home());
 
@@ -12,6 +14,8 @@ class Home extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return const MaterialApp(
+      debugShowCheckedModeBanner: false,
+      initialRoute: '/',
       title: _title,
       home: MyStatefulWidget(),
     );
@@ -32,7 +36,7 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
   static const List<Widget> _widgetOptions = <Widget>[
     MapClickPage(),
     HomeScreen(),
-    Text("Marte"),
+    MoonScreen(),
   ];
 
   void _onItemTapped(int index) {
@@ -47,34 +51,29 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
       body: Center(
         child: _widgetOptions.elementAt(_selectedIndex),
       ),
-      bottomNavigationBar: BottomNavigationBar(
-        items: const <BottomNavigationBarItem>[
-          BottomNavigationBarItem(
-            icon: Icon(
-              Icons.list,
-              color: Colors.white,
-            ),
-            label: '',
+      bottomNavigationBar: CurvedNavigationBar(
+        items: <Widget>[
+          Image.asset(
+            "assets/planeta-tierra.png",
+            width: 40,
           ),
-          BottomNavigationBarItem(
-            icon: Icon(
-              Icons.location_city,
-              color: Colors.white,
-            ),
-            label: '',
+          Image.asset(
+            "assets/ubicacion.png",
+            width: 40,
           ),
-          BottomNavigationBarItem(
-            icon: Icon(
-              Icons.fiber_manual_record_sharp,
-              color: Colors.white,
-            ),
-            label: '',
-          ),
+          Image.asset(
+            "assets/marte.png",
+            width: 40,
+          )
         ],
-        currentIndex: _selectedIndex,
-        selectedItemColor: Colors.amber[800],
         onTap: _onItemTapped,
         backgroundColor: Colors.black,
+        animationDuration: const Duration(milliseconds: 1500),
+        animationCurve: Curves.decelerate,
+        color: Colors.black,
+        buttonBackgroundColor: Colors.lightBlueAccent,
+        index: _selectedIndex,
+        height: 60,
       ),
     );
   }
