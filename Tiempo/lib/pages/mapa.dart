@@ -7,7 +7,7 @@ import 'package:flutter/widgets.dart';
 
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'package:weather_application/models/map.dart';
+import 'package:Tiempo/models/map.dart';
 
 CameraPosition _kInitialPosition =
     CameraPosition(target: LatLng(37.3754865, -6.0250989), zoom: 11.0);

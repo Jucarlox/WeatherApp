@@ -1,8 +1,8 @@
 import 'package:curved_navigation_bar/curved_navigation_bar.dart';
 import 'package:flutter/material.dart';
-import 'package:weather_application/pages/home_screen.dart';
-import 'package:weather_application/pages/mapa.dart';
-import 'package:weather_application/pages/moon.dart';
+import 'package:Tiempo/pages/home_screen.dart';
+import 'package:Tiempo/pages/mapa.dart';
+import 'package:Tiempo/pages/moon.dart';
 
 void main() => runApp(const Home());
 

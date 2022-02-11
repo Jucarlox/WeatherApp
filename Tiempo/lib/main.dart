@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:weather_application/models/weather_city.dart';
+import 'package:Tiempo/models/weather_city.dart';
 
 import 'pages/moon.dart';
 import 'pages/home.dart';

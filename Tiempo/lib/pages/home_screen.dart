@@ -4,17 +4,17 @@ import 'package:flutter/material.dart';
 
 import 'package:http/http.dart' as http;
 import 'package:http/http.dart';
-import 'package:weather_application/models/days.dart';
-import 'package:weather_application/models/one_call.dart';
-import 'package:weather_application/models/weather_city.dart';
+import 'package:Tiempo/models/days.dart';
+import 'package:Tiempo/models/one_call.dart';
+import 'package:Tiempo/models/weather_city.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import 'package:flutter_localizations/flutter_localizations.dart';
 
 import 'package:date_format/date_format.dart';
-import 'package:weather_application/pages/moon.dart';
+import 'package:Tiempo/pages/moon.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:weather_application/utils/preferences.dart';
+import 'package:Tiempo/utils/preferences.dart';
 
 late double latSelected = 0;
 late double lngSelected = 0;
